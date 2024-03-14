@@ -15,7 +15,7 @@ export type CursorState =
   | {
       mode: CursorMode.Chat;
       message: string;
-      previousMessage: string | null;
+      prevMessage: string | null;
     }
   | {
       mode: CursorMode.ReactionSelector;
