@@ -4,7 +4,11 @@ import { useCallback, useEffect, useState } from "react";
 import ChatCursor from "./cursors/ChatCursor";
 import { CursorMode } from "@/types/type";
 
-const Live = () => {
+const Live = ({
+  canvasRef,
+}: {
+  canvasRef: React.MutableRefObject<HTMLCanvasElement | null>;
+}) => {
   const others = useOthers();
   const [myPresence, updateMyPresence] = useMyPresence();
   const [cursorState, setCursorState] = useState({ mode: CursorMode.Hidden });
@@ -60,12 +64,13 @@ const Live = () => {
 
   return (
     <div
+      id="canvas"
       onPointerDown={handlePointerDown}
       onPointerLeave={handlePointerLeave}
       onPointerMove={handlePointerMove}
       className="h-[100vh] w-full flex justify-center items-center border-4 border-cyan-900"
     >
-      <h2 className="text-2xl text-white">Figma clone</h2>
+      <canvas ref={canvasRef} />
       {myPresence && (
         <ChatCursor
           cursor={myPresence}
