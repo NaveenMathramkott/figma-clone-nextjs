@@ -28,7 +28,7 @@ export const shapeElements = [
   },
   {
     icon: "/assets/freeform.svg",
-    name: "Free Drawing",
+    name: "Draw",
     value: "freeform",
   },
 ];
