@@ -4,7 +4,7 @@ Replication of Figma editor with real time colabration features using tech stack
 
 
   <div>
-    <img src="https://img.shields.io/badge/-Next_JS-black?style=for-the-badge&logoColor=white&logo=nextdotjs&color=000000" alt="nextdotjs" />
+    <img src="https://img.shields.io/badge/-Next_JS-black?style=for-the-badge&logoColor=white&logo=nextdotjs&color=000000" alt="nextjs" />
     <img src="https://img.shields.io/badge/-TypeScript-black?style=for-the-badge&logoColor=white&logo=typescript&color=3178C6" alt="typescript" />
     <img src="https://img.shields.io/badge/-Tailwind_CSS-black?style=for-the-badge&logoColor=white&logo=tailwindcss&color=06B6D4" alt="tailwindcss" />
   </div>
@@ -23,7 +23,13 @@ Real time Multi Users, Cursor chat for group communtication, Active users indica
 - **ctrl+c** : Copy
 - **ctrl+v** : Paste
 
+## Project Structure 
 
+- `app/`: Contains Next.js pages.
+- `components/`: Reusable React components.
+- `public/`: Static assets.
+- `lib/`: Library files and integrations.
+- `types/` : declaration of types.
 
 
 ## Quick start
@@ -59,12 +65,10 @@ Real time Multi Users, Cursor chat for group communtication, Active users indica
     ```
 
 
-## Project Structure 
 
-- `app/`: Contains Next.js pages.
-- `components/`: Reusable React components.
-- `public/`: Static assets.
-- `lib/`: Library files and integrations.
+
+## ScreenShot
+  ![](https://github.com/NaveenMathramkott/figma-clone-nextjs/blob/main/screenShot/figma-landing-screen.png)
 
 ## Credits 
 
