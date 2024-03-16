@@ -6,8 +6,12 @@ import { CursorMode } from "@/types/type";
 
 const Live = ({
   canvasRef,
+  undo,
+  redo,
 }: {
   canvasRef: React.MutableRefObject<HTMLCanvasElement | null>;
+  undo: () => void;
+  redo: () => void;
 }) => {
   const others = useOthers();
   const [myPresence, updateMyPresence] = useMyPresence();
