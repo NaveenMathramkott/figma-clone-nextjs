@@ -3,7 +3,7 @@ import Cursor from "./Cursor";
 import { COLORS } from "@/constants";
 
 const LiveCursor = ({ others }: { others: any }) => {
-  if (!others[0]?.presence?.x) return null;
+  if (!others[0]?.presence?.x || !others[0]?.presence?.y) return null;
 
   return (
     <Cursor

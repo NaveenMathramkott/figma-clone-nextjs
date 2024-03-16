@@ -68,7 +68,7 @@ const Live = ({
       onPointerDown={handlePointerDown}
       onPointerLeave={handlePointerLeave}
       onPointerMove={handlePointerMove}
-      className="h-[100vh] w-full flex justify-center items-center border-4 border-cyan-900"
+      className="h-[100vh] w-full flex justify-center items-center relative"
     >
       <canvas ref={canvasRef} />
       {myPresence && (
