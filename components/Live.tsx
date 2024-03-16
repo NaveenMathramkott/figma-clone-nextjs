@@ -3,6 +3,13 @@ import LiveCursor from "./cursors/LiveCursor";
 import { useCallback, useEffect, useState } from "react";
 import ChatCursor from "./cursors/ChatCursor";
 import { CursorMode } from "@/types/type";
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from "@radix-ui/react-context-menu";
+import { shortcuts } from "@/constants";
 
 const Live = ({
   canvasRef,
@@ -66,26 +73,67 @@ const Live = ({
     updateMyPresence({ message: null });
   }, []);
 
-  return (
-    <div
-      id="canvas"
-      onPointerDown={handlePointerDown}
-      onPointerLeave={handlePointerLeave}
-      onPointerMove={handlePointerMove}
-      className="h-[100vh] w-full flex justify-center items-center relative"
-    >
-      <canvas ref={canvasRef} />
-      {myPresence && (
-        <ChatCursor
-          cursor={myPresence}
-          setCursorState={setCursorState}
-          cursorState={cursorState}
-          updateMyPresence={updateMyPresence}
-        />
-      )}
+  const handleContextMenuClick = useCallback((key: string) => {
+    switch (key) {
+      case "Chat":
+        setCursorState({
+          mode: CursorMode.Chat,
+          prevMessage: null,
+          message: "",
+        });
+        break;
 
-      <LiveCursor others={others} />
-    </div>
+      case "Reactions":
+        setCursorState({ mode: CursorMode.ReactionSelector });
+        break;
+
+      case "Undo":
+        undo();
+        break;
+
+      case "Redo":
+        redo();
+        break;
+
+      default:
+        break;
+    }
+  }, []);
+
+  return (
+    <ContextMenu>
+      <ContextMenuTrigger
+        id="canvas"
+        onPointerDown={handlePointerDown}
+        onPointerLeave={handlePointerLeave}
+        onPointerMove={handlePointerMove}
+        className="h-[100vh] w-full flex justify-center items-center relative"
+      >
+        <canvas ref={canvasRef} />
+        {myPresence && (
+          <ChatCursor
+            cursor={myPresence}
+            setCursorState={setCursorState}
+            cursorState={cursorState}
+            updateMyPresence={updateMyPresence}
+          />
+        )}
+
+        <LiveCursor others={others} />
+      </ContextMenuTrigger>
+      <ContextMenuContent className="right-menu-content">
+        {shortcuts.map((item) => (
+          <ContextMenuItem
+            key={item.key}
+            className="right-menu-item"
+            onClick={() => handleContextMenuClick(item.name)}
+          >
+            <p>{item.name}</p>
+            <p className="text-xs text-primary-grey-300">{item.shortcut}</p>
+          </ContextMenuItem>
+        ))}
+      </ContextMenuContent>
+    </ContextMenu>
   );
 };
 

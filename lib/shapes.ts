@@ -61,7 +61,7 @@ export const createText = (pointer: PointerEvent, text: string) => {
     fontFamily: "Helvetica",
     fontSize: 36,
     fontWeight: "400",
-    objectId: uuidv4()
+    objectId: uuidv4(),
   } as fabric.ITextOptions);
 };
 
@@ -144,11 +144,11 @@ export const modifyShape = ({
 
   // if  property is width or height, set the scale of the selected element
   if (property === "width") {
-    selectedElement.set("scaleX", 1);
-    selectedElement.set("width", value);  
+    selectedElement.setElement("scaleX", 1);
+    selectedElement.setElement("width", value);
   } else if (property === "height") {
-    selectedElement.set("scaleY", 1);
-    selectedElement.set("height", value);
+    selectedElement.setElement("scaleY", 1);
+    selectedElement.setElement("height", value);
   } else {
     if (selectedElement[property as keyof object] === value) return;
     selectedElement.set(property as keyof object, value);
