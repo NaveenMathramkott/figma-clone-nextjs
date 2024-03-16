@@ -83,10 +83,6 @@ const Live = ({
         });
         break;
 
-      case "Reactions":
-        setCursorState({ mode: CursorMode.ReactionSelector });
-        break;
-
       case "Undo":
         undo();
         break;

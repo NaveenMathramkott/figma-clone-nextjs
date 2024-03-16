@@ -8,6 +8,7 @@ const ActiveUsers = () => {
   const currentUser = useSelf();
   const hasMoreUsers = users.length > 3;
 
+  // memoize the result of the function to prevent re reder but only there is change in users
   const memmoizedUsers = useMemo(() => {
     return (
       <div className="flex  justify-center items-center gap-1 py-2">
