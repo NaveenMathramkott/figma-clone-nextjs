@@ -3,7 +3,6 @@ import React from "react";
 import ActiveUsers from "./users/ActiveUsers";
 import Image from "next/image";
 import { navElements } from "@/constants";
-import { NewThread } from "./comments/NewThread";
 import { Button } from "./ui/button";
 import ShapesMenu from "./ShapesMenu";
 
@@ -20,7 +19,7 @@ const Navbar = ({
 
   return (
     <nav className="flex select-none items-center justify-between gap-4 bg-primary-black px-5 text-white">
-      <Image src="/assets/logo.svg" alt="FigPro Logo" width={58} height={20} />
+      <Image src="/assets/logo.jpg" alt="FigPro Logo" width={58} height={20} />
       <ul className="flex flex-row">
         {navElements.map((item: ActiveElement | any) => (
           <li
@@ -46,18 +45,6 @@ const Navbar = ({
                 handleActiveElement={handleActiveElement}
                 handleImageUpload={handleImageUpload}
               />
-            ) : item?.value === "comments" ? (
-              // If value is comments, trigger the NewThread component
-              <NewThread>
-                <Button className="relative w-5 h-5 object-contain">
-                  <Image
-                    src={item.icon}
-                    alt={item.name}
-                    fill
-                    className={isActive(item.value) ? "invert" : ""}
-                  />
-                </Button>
-              </NewThread>
             ) : (
               <Button className="relative w-5 h-5 object-contain">
                 <Image
