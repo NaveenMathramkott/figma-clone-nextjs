@@ -76,7 +76,8 @@ const RightSideBar = ({
       </section>
     ),
     [elementAttributes]
-  ); // only re-render when elementAttributes changes
+  );
+  // only re-render when elementAttributes changes
 
   return memoizedContent;
 };

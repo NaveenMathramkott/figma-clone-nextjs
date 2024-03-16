@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Work_Sans } from "next/font/google";
 import "./globals.css";
 import { Room } from "./Room";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
+// Setup the font styles
 const work_Sans = Work_Sans({
   subsets: ["latin"],
   variable: "--font-work-san",
@@ -22,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${work_Sans.className} bg-primary-grey-200`}>
-        <Room>{children}</Room>
+        <Room>
+          <TooltipProvider>{children}</TooltipProvider>
+        </Room>
       </body>
     </html>
   );

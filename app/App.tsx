@@ -56,19 +56,15 @@ export default function Page() {
     if (!object) return;
     const { objectId } = object;
 
-    /**
-     * Turn Fabric object (kclass) into JSON format so that we can store it in the
-     * key-value store.
-     */
+    // Turn Fabric object (kclass) into JSON format so that we can store it in the key-value store.
+
     const shapeData = object.toJSON();
     shapeData.objectId = objectId;
 
     const canvasObjects = storage.get("canvasObjects");
-    /**
-     * set is a method provided by Liveblocks that allows you to set a value
-     *
-     * set: https://liveblocks.io/docs/api-reference/liveblocks-client#LiveMap.set
-     */
+
+    // Set is a method provided by Liveblocks that allows you to set a value.
+
     canvasObjects.set(objectId, shapeData);
   }, []);
 
@@ -77,6 +73,8 @@ export default function Page() {
       canvasRef,
       fabricRef,
     });
+
+    // Events for the canvas
 
     canvas.on("mouse:down", (options: any) => {
       handleCanvasMouseDown({
@@ -162,13 +160,8 @@ export default function Page() {
     );
 
     return () => {
-      /**
-       * dispose is a method provided by Fabric that allows you to dispose
-       * the canvas. It clears the canvas and removes all the event
-       * listeners
-       *
-       * dispose: http://fabricjs.com/docs/fabric.Canvas.html#dispose
-       */
+      // It clears the canvas and removes all the event listeners
+
       canvas.dispose();
 
       window.removeEventListener("resize", () => {
@@ -199,28 +192,22 @@ export default function Page() {
   }, [canvasObjects]);
 
   const deleteAllShapes = useMutation(({ storage }) => {
-    // get the canvasObjects store
+    // Get the canvasObjects store and  if the store doesn't exist or is empty, return
     const canvasObjects = storage.get("canvasObjects");
 
-    // if the store doesn't exist or is empty, return
     if (!canvasObjects || canvasObjects.size === 0) return true;
 
-    // delete all the shapes from the store
+    // Delete all the shapes from the store and return true if the store is empty
     for (const [key, value] of canvasObjects.entries()) {
       canvasObjects.delete(key);
     }
 
-    // return true if the store is empty
     return canvasObjects.size === 0;
   }, []);
 
   const deleteShapeFromStorage = useMutation(({ storage }, shapeId) => {
-    /**
-     * canvasObjects is a Map that contains all the shapes in the key-value.
-     * Like a store. We can create multiple stores in liveblocks.
-     *
-     * delete: https://liveblocks.io/docs/api-reference/liveblocks-client#LiveMap.delete
-     */
+    // canvasObjects is a Map that contains all the shapes in the key-value. Like a store, We can create multiple stores in liveblocks.
+
     const canvasObjects = storage.get("canvasObjects");
     canvasObjects.delete(shapeId);
   }, []);
@@ -229,6 +216,7 @@ export default function Page() {
     setActiveElement(elem);
     switch (elem?.value) {
       // delete all the shapes from the canvas
+
       case "reset":
         // clear the storage
         deleteAllShapes();
@@ -240,7 +228,6 @@ export default function Page() {
         setActiveElement(defaultNavElement);
         break;
 
-      // delete the selected shape from the canvas
       case "delete":
         // delete it from the canvas
         handleDelete(fabricRef.current as any, deleteShapeFromStorage);
@@ -248,7 +235,6 @@ export default function Page() {
         setActiveElement(defaultNavElement);
         break;
 
-      // upload an image to the canvas
       case "image":
         // trigger the click event on the input element which opens the file dialog
         imageInputRef.current?.click();
@@ -263,10 +249,6 @@ export default function Page() {
           // disable the drawing mode of canvas
           fabricRef.current.isDrawingMode = false;
         }
-        break;
-
-      // for comments, do nothing
-      case "comments":
         break;
 
       default:
@@ -295,6 +277,7 @@ export default function Page() {
       />
       <section className="flex h-full flex-row">
         <LeftSideBar allShapes={Array.from(canvasObjects)} />
+        {/* canvas for live editing */}
         <Live canvasRef={canvasRef} undo={undo} redo={redo} />
         <RightSideBar
           elementAttributes={elementAttributes}
