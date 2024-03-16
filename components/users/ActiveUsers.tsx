@@ -16,7 +16,7 @@ const ActiveUsers = () => {
           {currentUser && (
             <Avatar name="me" otherStyles="border-[3px] border-primary-green" />
           )}
-          {users.slice(0, 2).map(({ connectionId }) => {
+          {users.slice(0, 3).map(({ connectionId }) => {
             console.log("connection id", connectionId);
             return (
               <Avatar

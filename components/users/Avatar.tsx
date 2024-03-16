@@ -3,8 +3,6 @@ import styles from "./avatar.module.css";
 import Image from "next/image";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
-const IMAGE_SIZE = 48;
-
 export function Avatar({
   otherStyles,
   name,
